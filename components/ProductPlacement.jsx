@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { FaPencil, FaTrashCan } from 'react-icons/fa6';
+import { FaBan, FaFloppyDisk, FaPencil, FaTrashCan } from 'react-icons/fa6';
 import Header from './global/Header';
 
 const ProductPlacement = () => {
@@ -46,6 +46,10 @@ const ProductPlacement = () => {
 		const selectedProduct = document.getElementById('product').value;
 		const quantity = document.getElementById('quantity').value;
 
+		if (!quantity || parseInt(quantity) === 0) {
+			setShowToast(true);
+			return; // Don't proceed if validation fails
+		}
 		// Create a new row object
 		const newRow = {
 			customer: selectedCustomer,
@@ -58,6 +62,9 @@ const ProductPlacement = () => {
 
 		// Show the success toast
 		setShowToast(true);
+		// setCustomer('');
+		// setProduct('');
+		setQuantity('');
 	};
 	const handleDelete = (index) => {
 		const updatedTableData = tableData.filter((_, i) => i !== index);
@@ -147,7 +154,7 @@ const ProductPlacement = () => {
 								className="btn btn-md btn-primary sm:w-full md:w-3/4 lg:w-3/4 xl:w-3/4"
 								onSubmit={handleUpload}
 							>
-								Upload
+								Save
 							</button>
 						</div>
 					</form>
@@ -202,36 +209,67 @@ const ProductPlacement = () => {
 										></path>
 									</svg>
 								</div>
-								<div className="stat-title">Acutal</div>
+								<div className="stat-title">Actual</div>
 								<div className="stat-value text-secondary">56</div>
 								<div className="stat-desc">For the Month of May</div>
 							</div>
 						</div>
 
 						<div className="overflow-x-auto my-4">
-							<table className="table">
+							<table className="table table-xs">
+								<thead className="bg-orange-500 w-full">
+									<tr className="w-full">
+										<th></th>
+										<th>Customer</th>
+										<th>Product</th>
+										<th>Quantity</th>
+										<th>Action</th>
+									</tr>
+								</thead>
 								<tbody>
 									{tableData.map((row, index) => (
 										<tr key={index}>
 											<th>{index + 1}</th>
 											<td>
 												{editIndex === index ? (
-													<input
-														type="text"
-														value={editCustomer}
-														onChange={(e) => setEditCustomer(e.target.value)}
-													/>
+													<>
+														<select
+															className="select select-bordered select-xs"
+															defaultValue="1"
+															id="editCustomer"
+															name="editCustomer"
+															value={editCustomer}
+															onChange={(e) => setEditCustomer(e.target.value)}
+														>
+															<option>Star Wars</option>
+															<option>Harry Potter</option>
+															<option>Lord of the Rings</option>
+															<option>Planet of the Apes</option>
+															<option>Star Trek</option>
+														</select>
+													</>
 												) : (
 													row.customer
 												)}
 											</td>
 											<td>
 												{editIndex === index ? (
-													<input
-														type="text"
+													<select
+														className="select select-bordered select-xs"
+														defaultValue="1"
+														id="editProduct"
+														name="editProduct"
 														value={editProduct}
 														onChange={(e) => setEditProduct(e.target.value)}
-													/>
+													>
+														<option disabled value="1">
+															Pick One
+														</option>
+														<option>Feeds</option>
+														<option>Treat</option>
+														<option>Dog food</option>
+														<option>VetMed</option>
+													</select>
 												) : (
 													row.product
 												)}
@@ -239,7 +277,8 @@ const ProductPlacement = () => {
 											<td className="text-center">
 												{editIndex === index ? (
 													<input
-														type="text"
+														type="number"
+														className="input input-borderedi input-xs w-16"
 														value={editQuantity}
 														onChange={(e) => setEditQuantity(e.target.value)}
 													/>
@@ -255,25 +294,25 @@ const ProductPlacement = () => {
 																className="btn btn-square btn-success btn-xs join-item"
 																onClick={handleSaveEdit}
 															>
-																Save
+																<FaFloppyDisk />
 															</button>
 															<button
-																className="btn btn-square btn-outline btn-xs join-item"
+																className="btn btn-square btn-outline btn-xs join-item  hover:bg-red-500"
 																onClick={() => setEditIndex(-1)}
 															>
-																Cancel
+																<FaBan />
 															</button>
 														</>
 													) : (
 														<>
 															<button
-																className="btn btn-square btn-outline btn-xs join-item"
+																className="btn btn-square btn-outline btn-xs join-item  hover:bg-green-600"
 																onClick={() => handleEdit(index)}
 															>
 																<FaPencil />
 															</button>
 															<button
-																className="btn btn-square btn-outline btn-xs join-item"
+																className="btn btn-square btn-outline btn-xs join-item hover:bg-red-500"
 																onClick={() => handleDelete(index)}
 															>
 																<FaTrashCan />

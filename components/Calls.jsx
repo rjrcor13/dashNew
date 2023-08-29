@@ -143,7 +143,7 @@ const Calls = () => {
 										></path>
 									</svg>
 								</div>
-								<div className="stat-title">Acutal</div>
+								<div className="stat-title">Actual</div>
 								<div className="stat-value text-secondary">56</div>
 								<div className="stat-desc">For the Month of May</div>
 							</div>
