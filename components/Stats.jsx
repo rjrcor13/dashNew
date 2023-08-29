@@ -12,11 +12,11 @@ const Stats = () => {
 							viewBox="0 0 24 24"
 							className="inline-block w-8 h-8 stroke-current"
 						>
-							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+							<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 							<g
 								id="SVGRepo_tracerCarrier"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							></g>
 							<g id="SVGRepo_iconCarrier"></g>
 

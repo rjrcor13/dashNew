@@ -7,3 +7,32 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+/* CSS animation for slide in */
+@keyframes slideIn {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+/* CSS animation for slide out */
+@keyframes slideOut {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+/* Apply slide in animation to toast when it's shown */
+.toast-slide-in {
+	animation: slideIn 0.3s forwards;
+}
+
+/* Apply slide out animation to toast when it's exiting */
+.toast-slide-out {
+	animation: slideOut 0.3s forwards;
+}

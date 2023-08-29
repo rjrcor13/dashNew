@@ -115,14 +115,16 @@ const TargetActual = () => {
 			},
 		},
 		responsive: true,
-		scales: {
-			x: {
-				stacked: true,
-			},
-			y: {
-				stacked: true,
-			},
-		},
+		maintainAspectRatio: true,
+		aspectRatio: 3,
+		// scales: {
+		// 	x: {
+		// 		stacked: true,
+		// 	},
+		// 	y: {
+		// 		stacked: true,
+		// 	},
+		// },
 	};
 	return (
 		<div>
@@ -152,12 +154,10 @@ const TargetActual = () => {
 					Hilongos
 				</a>
 			</div>
-			<Bar
-				options={options}
-				data={tabData[activeTab]}
-				height={30}
-				width="100%"
-			/>
+			<div className=" relative h-auto w-full">
+				<Bar options={options} data={tabData[activeTab]} />
+			</div>
+
 			{/* <Bar options={options} data={data} height={30} width="100%" /> */}
 		</div>
 	);
